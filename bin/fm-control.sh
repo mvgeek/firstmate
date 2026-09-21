@@ -70,6 +70,10 @@
 #              inherits the local copy but none of the conversation; a
 #              secondmate reconciles its own home's records at startup, so its
 #              standing charter is never rewritten.
+#              A claude replacement keeps the task's recorded Claude config
+#              store unless FM_CLAUDE_CONFIG_DIR names another, and a store
+#              that no longer exists refuses before the old agent is stopped
+#              (bin/fm-claude-store-lib.sh).
 #              Records a durable checkpoint and that note, exits the old agent,
 #              then delegates the launch to its single owner,
 #              bin/fm-spawn.sh --relaunch. A failure before publication keeps
@@ -156,6 +160,8 @@ DATA="${FM_DATA_OVERRIDE:-$FM_HOME/data}"
 . "$SCRIPT_DIR/fm-backend.sh"
 # shellcheck source=bin/fm-busy-lib.sh
 . "$SCRIPT_DIR/fm-busy-lib.sh"
+# shellcheck source=bin/fm-claude-store-lib.sh
+. "$SCRIPT_DIR/fm-claude-store-lib.sh"
 # shellcheck source=bin/fm-control-lib.sh
 . "$SCRIPT_DIR/fm-control-lib.sh"
 # shellcheck source=bin/fm-pr-lib.sh
@@ -763,6 +769,10 @@ resolve_relaunch_profile() {
   if [ "$TARGET_EFFORT" = ultra ]; then
     "$SCRIPT_DIR/fm-harness.sh" validate-native-effort "$TARGET_HARNESS" "$TARGET_MODEL" "$TARGET_EFFORT" || return 1
   fi
+  # The launch owner refuses a Claude config store it cannot honour; ask the
+  # same owner here so that refusal also lands before the old agent stops.
+  fm_claude_store_resolve "$TARGET_HARNESS" "$META" \
+    || die "$FM_CLAUDE_STORE_ERROR"
 }
 
 # safe_checkpoint: prove, before anything is stopped, that the work a relaunch
