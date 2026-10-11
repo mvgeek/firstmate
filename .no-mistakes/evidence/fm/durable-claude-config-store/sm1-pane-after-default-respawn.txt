@@ -1,0 +1,50 @@
+aman@Ahmed-Amanullas-MacBook smhome % export GOTMPDIR=/tmp/fm-sm1/gotmp
+aman@Ahmed-Amanullas-MacBook smhome % export COMPACT_ADVISER_DISABLE=1
+aman@Ahmed-Amanullas-MacBook smhome % . '/tmp/fm-sm1+8ca95e9c86809960c795d94eb6e5574187567091112c5e9ccea8a682193b45df/launch.s1791719959.85775.1292.sh'
+ ▐▛███▛█   Claude Code v2.1.296
+▝▜██████▀  Opus 5.5 · API Usage Billing
+ ▝▝   ▝▝   /private/var/folders/q4/nft8bs656qjb8k7bcjd_tt8r0000gn/T/fm-labsm.tXWruU/smhome
+
+
+❯ : Firstmate operational input waiting: read '/private/var/folders/q4/nft8bs656qjb8k7bcjd_tt8r0000gn/T/fm-labsm.tXWruU/smhome/state/operational-inbox/1791719960-9af47a39c7e65b61.msg' and handle its
+  contents as Firstmate operational input.
+  ⎿  Not logged in · Please run /login
+
+✻ Worked for 6s · done 7:59 PM
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❯ 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  ⏵⏵ bypass permissions on (shift+tab to cycle) · ← for agents                                                                                                              Not logged in · Run /login
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

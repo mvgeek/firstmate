@@ -1,0 +1,15 @@
+# Targeted automated store tests (filtered copies of tests/fm-control-relaunch.test.sh and tests/fm-spawn-dispatch-profile.test.sh)
+ok - fm-control relaunch: the replacement follows the pin, and keeps its recorded store with ambient credentials shed once the pin is gone
+ok - fm-control relaunch: the recorded Claude store wins over the relauncher's ambient store
+ok - fm-spawn --relaunch: the recorded Claude store wins over the ambient store
+ok - fm-control relaunch: FM_CLAUDE_CONFIG_DIR launches on and records a new store
+ok - fm-control relaunch: FM_CLAUDE_CONFIG_DIR=default returns a recorded task to Claude's default store durably
+ok - relaunch: a recorded or override Claude store that does not exist refuses, and fm-control refuses before the stop
+ok - fm-control relaunch: a harness switch away from claude keeps the recorded store for the switch back
+ok - secondmate: relaunch and liveness respawn keep the recorded Claude store, and a vanished one refuses
+ok - secondmate: a recorded default Claude store survives relaunch and respawn under another ambient store
+rc=0
+ok - claude forwards firstmate's CLAUDE_CONFIG_DIR so the crewmate uses the same credential store, and records it
+ok - claude records the default store and strips CLAUDE_CONFIG_DIR when firstmate runs with the single-store default
+ok - non-claude harnesses do not receive the claude CLAUDE_CONFIG_DIR prefix
+rc=0
