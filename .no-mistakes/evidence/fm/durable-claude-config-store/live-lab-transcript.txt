@@ -1,0 +1,97 @@
+=== Scenario 1: first secondmate spawn from a primary on store-work (ambient CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-work; tmux server env carries store-personal)
+$ CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-work fm-spawn.sh labcs9500-mate --secondmate
+record: claude_config_dir=/private/tmp/fmcs.vfCuNa/store-work
+claude pid=15974
+CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-work
+store-work contents (written by the real claude): .claude.json backups cache sessions 
+store-personal contents: []
+=== Scenario 2: secondmate's claude dies; session-start liveness sweep runs from a primary on store-personal
+$ CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-personal FM_BOOTSTRAP_NETWORK=only fm-bootstrap.sh
+BOOTSTRAP_INFO: secondmate labcs9500-mate relaunched after confirmed agent absence on existing endpoint (backend=tmux)
+record: claude_config_dir=/private/tmp/fmcs.vfCuNa/store-work
+claude pid=33852
+CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-work
+store-personal contents: []
+relaunch ledger: attempt relaunched 
+=== Scenario 3: claude dies again; fm-spawn --relaunch (fm-control's launch owner) run from a primary on store-personal
+$ CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-personal fm-spawn.sh labcs9500-mate --relaunch
+spawned labcs9500-mate harness=claude kind=secondmate mode=secondmate yolo=off window=firstmate:fm-labcs9500-mate worktree=/private/tmp/fmcs.vfCuNa/mate
+record: claude_config_dir=/private/tmp/fmcs.vfCuNa/store-work
+claude pid=40390
+CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-work
+store-personal contents: []
+=== Scenario 4: the secondmate's worker inherits its account
+lab tmux server global env (what a bare pane would inherit): CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-personal
+secondmate claude process env: claude pid=40390 CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-work 
+$ (FM_HOME=<mate home>, CLAUDE_CONFIG_DIR read from the secondmate's live claude process) fm-spawn.sh labcs44614-w <mate>/projects/notes --harness claude ...
+spawned labcs44614-w harness=claude kind=ship mode=local-only yolo=on window=firstmate:fm-labcs44614-w worktree=/private/tmp/fmcs.vfCuNa/treehouse/.treehouse/notes-bc86ff/1/notes
+worker record: claude_config_dir=/private/tmp/fmcs.vfCuNa/store-work
+worker claude pid=55698 CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-work
+store-personal contents: []
+=== Scenario 5 (adversarial): the recorded store directory vanishes; recovery from store-personal must refuse, not fall back
+$ mv store-work store-work.moved
+$ CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-personal fm-control.sh labcs9500-mate relaunch   (agent live, pid=40390)
+error: the task's recorded Claude config store '/private/tmp/fmcs.vfCuNa/store-work' (claude_config_dir= in /private/tmp/fmcs.vfCuNa/home/state/labcs9500-mate.meta) no longer exists; refusing rather than launching on a different account - restore that directory or relaunch with FM_CLAUDE_CONFIG_DIR=<store> (or 'default') to choose one deliberately
+rc=1
+agent after refusal: pid=40390 (same process => not stopped)
+record unchanged: yes
+$ kill 40390; CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-personal FM_BOOTSTRAP_NETWORK=only fm-bootstrap.sh
+SECONDMATE_LIVENESS: secondmate labcs9500-mate: respawn failed after confirmed agent absence on existing endpoint: error: the task's recorded Claude config store '/private/tmp/fmcs.vfCuNa/store-work' (claude_config_dir= in /private/tmp/fmcs.vfCuNa/home/state/labcs9500-mate.meta) no longer exists; refusing rather than launching on a different account - restore that directory or relaunch with FM_CLAUDE_CONFIG_DIR=<store> (or 'default') to choose one deliberately
+rc=0
+mate pane: no claude process found 
+store-personal contents: []
+=== Scenario 6: deliberate override FM_CLAUDE_CONFIG_DIR moves the secondmate to another store, durably
+$ CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-personal FM_CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-other fm-spawn.sh labcs9500-mate --secondmate
+spawned labcs9500-mate harness=claude kind=secondmate mode=secondmate yolo=off window=firstmate:fm-labcs9500-mate worktree=/private/tmp/fmcs.vfCuNa/mate
+rc=0
+record: claude_config_dir=/private/tmp/fmcs.vfCuNa/store-other
+claude pid=13014
+CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-other
+$ kill 13014; CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-personal FM_BOOTSTRAP_NETWORK=only fm-bootstrap.sh   (no override this time)
+BOOTSTRAP_INFO: secondmate labcs9500-mate relaunched after confirmed agent absence on existing endpoint (backend=tmux)
+record: claude_config_dir=/private/tmp/fmcs.vfCuNa/store-other
+claude pid=20113
+CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-other
+store-other contents: .claude.json backups cache sessions 
+store-personal contents: []
+=== Scenario 7: FM_CLAUDE_CONFIG_DIR=default returns the secondmate to Claude's default store, and recovery keeps it there
+(lab HOME=/private/tmp/fmcs.vfCuNa/userhome, so Claude's default store is the lab's own /private/tmp/fmcs.vfCuNa/userhome/.claude.json; the relauncher and the lab tmux server global env both carry CLAUDE_CONFIG_DIR=store-personal)
+$ kill 84456; CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-personal FM_CLAUDE_CONFIG_DIR=default fm-spawn.sh labcs9500-mate --relaunch
+spawned labcs9500-mate harness=claude kind=secondmate mode=secondmate yolo=off window=firstmate:fm-labcs9500-mate worktree=/private/tmp/fmcs.vfCuNa/mate
+rc=0
+record: claude_config_dir=default
+claude pid=95818
+CLAUDE_CONFIG_DIR=<unset>
+pane shell (pid 78996): no CLAUDE_CONFIG_DIR in its env; claude ran on the lab default store, which it populated below
+default store (/private/tmp/fmcs.vfCuNa/userhome) contents: .claude .claude.json .treehouse .zsh_history 
+$ kill 95818; CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-personal FM_BOOTSTRAP_NETWORK=only fm-bootstrap.sh   (no override)
+BOOTSTRAP_INFO: secondmate labcs9500-mate relaunched after confirmed agent absence on existing endpoint (backend=tmux)
+record: claude_config_dir=default
+claude pid=11942
+CLAUDE_CONFIG_DIR=<unset>
+store-personal contents: []
+
+=== Scenario 8: fresh spawn on an ambient named store keeps the operator's provider selector (no pin)
+(lab tmux global env: CLAUDE_CODE_USE_BEDROCK=1)
+$ FM_HOME=<mate home> CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-personal fm-spawn.sh labcs37082-bedrock2 <mate>/projects/notes --harness claude ...
+record: claude_config_dir=/private/tmp/fmcs.vfCuNa/store-personal 
+claude pid=54558
+CLAUDE_CODE_USE_BEDROCK=1
+CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-personal
+
+=== Scenario 9: removed-pin case: the task's record carries pin provenance (claude_config_pinned=1, as a pinned spawn writes it), config/claude-account is absent, and the relauncher plus the pane shell carry ambient credentials and a different store
+$ kill 54558; (pane) export ANTHROPIC_API_KEY=lab-fake-not-a-key CLAUDE_CODE_USE_BEDROCK=1
+$ CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-other ANTHROPIC_API_KEY=lab-fake-not-a-key fm-spawn.sh labcs37082-bedrock2 --relaunch
+spawned labcs37082-bedrock2 harness=claude kind=ship mode=local-only yolo=on window=firstmate:fm-labcs37082-bedrock2 worktree=/private/tmp/fmcs.vfCuNa/treehouse/.treehouse/notes-bc86ff/3/notes
+rc=0
+config/claude-account present: no
+record: claude_config_dir=/private/tmp/fmcs.vfCuNa/store-personal claude_config_pinned=1 
+claude pid=74544
+CLAUDE_CONFIG_DIR=/private/tmp/fmcs.vfCuNa/store-personal
+(no ANTHROPIC_API_KEY / CLAUDE_CODE_USE_BEDROCK line above = shed)
+pane history (the export ran in the same shell right before the relaunch's launch script):
+aman@Ahmed-Amanullas-MacBook notes % . '<taskdir>/launch.s1791994673.37692.15849.sh'
+aman@Ahmed-Amanullas-MacBook notes % export ANTHROPIC_API_KEY=lab-fake-not-a-key CLAUDE_CODE_USE_BEDROCK=1
+aman@Ahmed-Amanullas-MacBook notes % . '<taskdir>/launch.s1791994712.69333.5486.sh'
+Claude-store prefix of the first (ambient) launch script:  env CLAUDE_CONFIG_DIR='/private/tmp/fmcs.vfCuNa/store-personal'
+Claude-store prefix of the pin-provenance relaunch script: env -u CLAUDE_CODE_USE_BEDROCK -u CLAUDE_CODE_USE_VERTEX -u CLAUDE_CODE_USE_FOUNDRY -u CLAUDE_CODE_USE_ANTHROPIC_AWS -u CLAUDE_CODE_USE_MANTLE -u ANTHROPIC_AUTH_TOKEN -u ANTHROPIC_API_KEY -u CLAUDE_CODE_OAUTH_TOKEN -u ANTHROPIC_PROFILE -u ANTHROPIC_FEDERATION_RULE_ID CLAUDE_CONFIG_DIR='/private/tmp/fmcs.vfCuNa/store-personal'
