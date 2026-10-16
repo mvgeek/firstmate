@@ -1,0 +1,18 @@
+meta after respawn:
+claude_config_dir=/Users/aman/.claude-personal
+running mate claude pid=3362 env:
+CLAUDE_CONFIG_DIR=/Users/aman/.claude-personal
+store-other contents:
+pane:
+ ▐▛███▛█   Claude Code v2.1.301
+▝▜██████▀  Sonnet 5.5 with low effort · Claude Team
+ ▝▝   ▝▝   /private/tmp/fmlab.wovdzU/mate
+❯ : Firstmate operational input waiting: read '/private/tmp/fmlab.wovdzU/mate/state/operational-inbox/1792120316-197bd4ff593899db.msg' and handle its contents as Firstmate operational input.
+  Read 1 file
+⏺ Charter read. It's an idle lab second mate with no routed task and no marked request, so there's nothing to do or report. I'm staying idle until the main firstmate routes work.
+✻ Churned for 12s · done 11:12 AM
+                                                                                                                      tmux focus-events off · add 'set -g focus-events on' to ~/.tmux.conf and reattach for focus tracking
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❯ 
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  ⏵⏵ auto mode on (shift+tab to cycle) · ← for agents

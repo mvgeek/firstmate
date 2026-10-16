@@ -1,0 +1,4 @@
+window=firstmate:fm-lab5da9001d16e6-mate
+harness=claude
+kind=secondmate
+claude_config_dir=/Users/aman/.claude-personal

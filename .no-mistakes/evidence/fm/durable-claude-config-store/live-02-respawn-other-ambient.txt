@@ -1,0 +1,4 @@
+$ CLAUDE_CONFIG_DIR=/private/tmp/fmlab.wovdzU/store-other fm-spawn.sh lab5da9001d16e6-mate --secondmate   # liveness respawn from a relauncher on a different account (mate window killed)
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /private/tmp/fmlab.wovdzU/home
+spawned lab5da9001d16e6-mate harness=claude kind=secondmate mode=secondmate yolo=off window=firstmate:fm-lab5da9001d16e6-mate worktree=/private/tmp/fmlab.wovdzU/mate
+exit=0

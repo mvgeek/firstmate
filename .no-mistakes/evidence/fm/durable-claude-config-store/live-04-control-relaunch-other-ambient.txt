@@ -1,0 +1,5 @@
+$ CLAUDE_CONFIG_DIR=/private/tmp/fmlab.wovdzU/store-other fm-control.sh lab5da9001d16e6-mate relaunch
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /private/tmp/fmlab.wovdzU/home
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /private/tmp/fmlab.wovdzU/home
+relaunched lab5da9001d16e6-mate harness=claude from=claude model=sonnet effort=low backend=tmux endpoint=firstmate:fm-lab5da9001d16e6-mate worktree=/private/tmp/fmlab.wovdzU/mate
+exit=0

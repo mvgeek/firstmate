@@ -1,0 +1,14 @@
+# recorded store /private/tmp/fmlab.wovdzU/store-work removed; agent pid 28135 running
+$ CLAUDE_CONFIG_DIR=/Users/aman/.claude-personal fm-control.sh lab5da9001d16e6-mate relaunch
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /private/tmp/fmlab.wovdzU/home
+error: the task's recorded Claude config store '/private/tmp/fmlab.wovdzU/store-work' (claude_config_dir= in /private/tmp/fmlab.wovdzU/home/state/lab5da9001d16e6-mate.meta) no longer exists; refusing rather than launching on a different account - restore that directory or relaunch with FM_CLAUDE_CONFIG_DIR=<store> (or 'default') to choose one deliberately
+exit=1
+old agent still alive: 28135
+meta unchanged
+
+# kill window, then liveness respawn
+$ CLAUDE_CONFIG_DIR=/Users/aman/.claude-personal fm-spawn.sh lab5da9001d16e6-mate --secondmate
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /private/tmp/fmlab.wovdzU/home
+error: the task's recorded Claude config store '/private/tmp/fmlab.wovdzU/store-work' (claude_config_dir= in /private/tmp/fmlab.wovdzU/home/state/lab5da9001d16e6-mate.meta) no longer exists; refusing rather than launching on a different account - restore that directory or relaunch with FM_CLAUDE_CONFIG_DIR=<store> (or 'default') to choose one deliberately
+exit=1
+mate window present: 0

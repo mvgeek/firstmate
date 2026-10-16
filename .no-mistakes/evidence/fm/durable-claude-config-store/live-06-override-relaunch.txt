@@ -1,0 +1,22 @@
+$ FM_CLAUDE_CONFIG_DIR=/private/tmp/fmlab.wovdzU/store-work fm-control.sh lab5da9001d16e6-mate relaunch   # deliberate override (ambient = personal)
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /private/tmp/fmlab.wovdzU/home
+fm-gate-refuse: gate agent lifecycle permitted only against lab home /private/tmp/fmlab.wovdzU/home
+relaunched lab5da9001d16e6-mate harness=claude from=claude model=sonnet effort=low backend=tmux endpoint=firstmate:fm-lab5da9001d16e6-mate worktree=/private/tmp/fmlab.wovdzU/mate
+exit=0
+meta:
+claude_config_dir=/private/tmp/fmlab.wovdzU/store-work
+claude pid=28135
+CLAUDE_CONFIG_DIR=/private/tmp/fmlab.wovdzU/store-work
+store-work now: [.claude.json backups cache sessions ]
+aman@Ahmed-Amanullas-MacBook mate % export GOTMPDIR=/tmp/fm-lab5da9001d16e6-mate/gotmp
+aman@Ahmed-Amanullas-MacBook mate % export COMPACT_ADVISER_DISABLE=1
+aman@Ahmed-Amanullas-MacBook mate % . '/tmp/fm-lab5da9001d16e6-mate+773b222418e3ad37108e4631b7d7793a504b04f54033ad87ae5e8998c87c9ca7/launch.s1792120314.98069.13849.sh'
+Resume this session with:
+claude --resume 5edb2770-893b-4a4c-9b59-14d53fb8d81a
+aman@Ahmed-Amanullas-MacBook mate % export GOTMPDIR=/tmp/fm-lab5da9001d16e6-mate/gotmp
+aman@Ahmed-Amanullas-MacBook mate % export COMPACT_ADVISER_DISABLE=1
+aman@Ahmed-Amanullas-MacBook mate % . '/tmp/fm-lab5da9001d16e6-mate+773b222418e3ad37108e4631b7d7793a504b04f54033ad87ae5e8998c87c9ca7/launch.s1792120356.11931.27909.sh'
+Resume this session with:
+claude --resume de73fe0b-aadd-4319-b559-83e04ca9c077
+aman@Ahmed-Amanullas-MacBook mate % export GOTMPDIR=/tmp/fm-lab5da9001d16e6-mate/gotmp
+aman@Ahmed-Amanullas-MacBook mate % export COMPACT_ADVISER_DISABLE=1
