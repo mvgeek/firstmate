@@ -1,0 +1,14 @@
+$ git clone https://github.com/kunchenguid/firstmate
+Cloning into 'firstmate'...
+exit=0
+$ ls firstmate | head
+AGENTS.md
+CLAUDE.md
+CONTRIBUTING.md
+GROK_BOT.md
+LICENSE
+README.md
+VISION.md
+assets
+$ head -1 firstmate/README.md
+<h1 align="center">firstmate</h1>

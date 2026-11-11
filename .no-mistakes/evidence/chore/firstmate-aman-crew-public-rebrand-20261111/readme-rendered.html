@@ -1,0 +1,67 @@
+<!doctype html><meta charset="utf-8"><style>body{font:16px -apple-system,Segoe UI,Helvetica,Arial;max-width:900px;margin:40px auto;padding:0 20px;color:#1f2328}img{max-width:100%}code{background:#eff1f3;padding:2px 4px;border-radius:4px}pre{background:#f6f8fa;padding:12px;border-radius:6px;overflow:auto}</style>
+<h1 align="center">Aman Crew</h1>
+<p align="center">
+  <a href="https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue?style=flat-square" rel="nofollow"><img alt="Platform" src="https://camo.githubusercontent.com/327833a4b2517f62308828d78f2103971d56414626d5adb1391396278e63eeb6/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f706c6174666f726d2d6d61634f532532302537432532304c696e75782d626c75653f7374796c653d666c61742d737175617265" data-canonical-src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux-blue?style=flat-square" style="max-width: 100%;"></a>
+  <a href="https://x.com/kunchenguid" rel="nofollow"><img alt="X" src="https://camo.githubusercontent.com/758198a034b7ac6257103933f6320aab2366ec20e24f6c1dfea5a105eeefd1ce/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f582d406b756e6368656e677569642d626c61636b3f7374796c653d666c61742d737175617265" data-canonical-src="https://img.shields.io/badge/X-@kunchenguid-black?style=flat-square" style="max-width: 100%;"></a>
+  <a href="https://discord.gg/Wsy2NpnZDu" rel="nofollow"><img alt="Discord" src="https://camo.githubusercontent.com/3eb64fccfb56bff0f7bcb6f4f7c563d48298802e5ebaab7604de88ba219a3338/68747470733a2f2f696d672e736869656c64732e696f2f646973636f72642f313433393930313833313033383736333039323f7374796c653d666c61742d737175617265266c6162656c3d646973636f7264" data-canonical-src="https://img.shields.io/discord/1439901831038763092?style=flat-square&amp;label=discord" style="max-width: 100%;"></a>
+</p>
+<h3 align="center">Talk to one agent. Ship with a crew.</h3>
+<p align="center">
+  <a target="_blank" rel="noopener noreferrer" href="assets/banner.png"><img alt="Aman Crew - talk to one agent, ship with a crew" src="banner.png" width="100%" style="max-width: 100%;"></a>
+</p>
+<h2>What it is</h2>
+<p>You can run one coding agent easily.<br>
+But the moment you want three project tasks done in parallel - fixes, investigations, plans, audits - you become a tab-juggler: babysitting sessions, copy-pasting context between repos, forgetting which terminal had the failing test.</p>
+<p>Aman Crew flips the model.<br>
+You talk to a single agent - the first mate - and it runs the crew for you: spawning autonomous agents in a visible session backend, giving each a clean git worktree, supervising them to completion, and handing you finished PRs, approved local merges, or standalone investigation reports.<br>
+For larger fleets, you can opt in to persistent secondmates: second mates that are still ordinary direct reports, but run from their own isolated firstmate homes on this machine or another SSH-reachable host.</p>
+<p>Aman Crew is not a model, not a harness, not a skill, not an MCP server, and not a CLI.<br>
+Aman Crew is an agent distro for running a crew of agents.<br>
+An agent distro is a portable directory of instructions, skills, tooling, policies, and state conventions that turns a general-purpose agent into a specialized one.<br>
+There is no app to install: the cloned repo is the distro - <code class="notranslate">AGENTS.md</code>, bundled Aman Crew skills, and helper scripts that any terminal coding agent can follow.<br>
+Launching a supported harness inside it for your primary session instantiates your first mate - and makes you the captain.</p>
+<h2>Features</h2>
+<ul>
+<li><strong>One liaison</strong> - you talk only to the first mate; it dispatches, supervises, escalates only real decisions, and reports plain outcomes.</li>
+<li><strong>A visible crew</strong> - every crewmate works in its own tmux window or Herdr tab, or in an experimental Zellij tab, experimental cmux workspace, experimental Tern block, experimental Orca terminal, or experimental T3 Code thread you can watch or interact with; the first mate reconciles.</li>
+<li><strong>Disposable worktrees</strong> - each task runs in a clean <a href="https://github.com/kunchenguid/treehouse">treehouse</a> git worktree, or an Orca-managed worktree when <code class="notranslate">backend=orca</code>, so parallel work on one repo never collides.</li>
+<li><strong>Two task shapes</strong> - ship tasks deliver authorized changes; scout tasks leave standalone investigation reports when the intake contract warrants separate research.</li>
+<li><strong>Explicit project modes</strong> - each project ships via <code class="notranslate">no-mistakes</code>, <code class="notranslate">direct-PR</code>, or <code class="notranslate">local-only</code>, with an optional <code class="notranslate">+yolo</code> merge-autonomy flag, an optional <code class="notranslate">branch=&lt;prefix&gt;</code> override for the default <code class="notranslate">fm/</code> ship-branch prefix, and an optional <code class="notranslate">forge=gerrit</code> binding under which the worker publishes a Gerrit change instead of opening a pull request, plus an optional <code class="notranslate">pr=manual</code> token under which the worker writes the PR title and body instead of the pipeline.</li>
+<li><strong>Self-repo boundary</strong> - a home runs as firstmate user/operator by default, so a firstmate bug is diagnosed and patched locally but never pushed, PRed, issued, commented, or forked upstream on its own; publishing to firstmate's own repository needs the <code class="notranslate">config/firstmate-role</code> maintainer opt-in or a per-task captain consent (<a href="docs/configuration.md#firstmate-role-configfirstmate-role">schema</a>).</li>
+<li><strong>Optional secondmates</strong> - opt in to persistent second mates that run from isolated firstmate homes with their own <code class="notranslate">FM_HOME</code>, state, projects, and session lock, either locally or as a whole home on an SSH-reachable host, with guarded updates and recovery that never turns an unavailable remote route into a local replacement.</li>
+<li><strong>Event-driven, zero-token supervision</strong> - a bash watcher sleeps on the fleet and wakes the first mate only when something needs you; verified primary harnesses also get a turn-end backstop that blocks or follows up on a blind stop when work is under way and supervision is not live.</li>
+<li><strong>Optional Relay</strong> - opt in with one local <code class="notranslate">.env</code> pairing token so firstmate can answer your public mentions on X and Discord alike, act on normal reversible mention requests through the same lifecycle as chat requests, acknowledge spawned work, and post up to three public-safe completion follow-ups within seven days for genuine milestones and the final outcome without changing non-Relay behavior; a final reply promised in a thread becomes durable state that is reconciled from disk, so a restart or a compacted conversation cannot lose it; dry-run preview records would-be replies and dismissals locally before go-live.</li>
+<li><strong>Strict project boundary</strong> - the first mate is read-only over your projects except for the narrow guarded and captain-approved operations authorized by <a href="AGENTS.md#1-identity-and-prime-directives">hard rule 1</a>, including fleet sync's guarded safe branch pruning; crewmates make every other project change behind the configured merge authority.</li>
+<li><strong>Restart-proof</strong> - all state lives on disk and in the active session backend (see <a href="docs/configuration.md#backend-selection-order">backend selection</a>); the next session reconciles after a restart, while ordinary supervision recovers confirmed-dead secondmate agents without waiting for one.</li>
+</ul>
+<p>Full detail on every feature lives in <a href="docs/architecture.md">docs/architecture.md</a>.</p>
+<h2>Quick Start</h2>
+<h3>Requirements</h3>
+<ul>
+<li>A verified primary agent harness: Claude Code, Grok, Pi, <code class="notranslate">pi-signed</code>, Oh My Pi (<code class="notranslate">omp</code>), Codex, OpenCode, Cursor Agent CLI, or Antigravity CLI (<code class="notranslate">agy</code>).</li>
+<li>Git and the GitHub CLI, authenticated through <code class="notranslate">gh auth login</code>.</li>
+<li>The CLI and dependencies for your selected runtime backend; tmux is the reference default.</li>
+</ul>
+<p>The first mate detects supported missing or outdated tools and offers their install or upgrade after you approve.<br>
+Backend-specific setup is linked in <a href="#documentation">Documentation</a>.</p>
+<h3>Recommended harnesses</h3>
+<p><strong>Claude Code, Grok, and Pi are equal co-primary recommendations</strong> for running the primary firstmate session, with <code class="notranslate">pi-signed</code> supported as Pi's distinct signed-wrapper identity.<br>
+Claude Code uses tracked Stop and StopFailure hooks for <a href="docs/watcher-continuity.md#claude-stop-hook">tokenless watcher re-arm and rewake</a>, including API-error turn ends, Grok uses background-notify wake cycles, and Pi uses its tracked primary watcher extension.<br>
+All three have verified turn-end guard paths when launched with their documented setup.<br>
+Pick whichever one matches your subscription and workflow.</p>
+<p>Oh My Pi (<code class="notranslate">omp</code>), a Pi fork, is verified as a primary with the same extension-owned watcher model as Pi and a stronger turn-end guard: its blocking <code class="notranslate">session_stop</code> hook compels a continuation instead of requesting one.<br>
+Codex and OpenCode are also verified and supported as primary harnesses; Codex uses bounded foreground checkpoints unless a home opts in to its model-free native Stop park, and OpenCode uses a TUI plugin, so both carry more harness-specific supervision tradeoffs than the three co-primaries.<br>
+Cursor Agent CLI is verified as a primary too, using a tracked project-scope <code class="notranslate">.cursor/hooks.json</code> whose <code class="notranslate">stop</code> hook parks on the watcher between turns, closest in shape to Claude Code's.<br>
+Launch it with <code class="notranslate">--trust</code>, or none of its project hooks load; it also has no turn-end hook in headless <code class="notranslate">cursor-agent -p</code>, so run the primary session interactively.<br>
+Antigravity CLI (<code class="notranslate">agy</code>) is verified as a primary too, using a tracked project-local <code class="notranslate">.agents/hooks.json</code> whose Stop hook parks on the watcher between turns like Cursor's.</p>
+<h3>Install and launch</h3>
+<div class="highlight highlight-source-shell"><pre class="notranslate">gh auth login
+git clone https://github.com/kunchenguid/firstmate
+<span class="pl-c1">cd</span> firstmate</pre></div>
+<p>Aman Crew is the product name; <code class="notranslate">firstmate</code> stays the name of the agent you talk to, of the repository path above, and of everything an installation already uses.<br>
+An existing clone keeps working untouched: <code class="notranslate">/updatefirstmate</code> follows whatever <code class="notranslate">origin</code> already points at.<br>
+Every <code class="notranslate">fm-*</code> command, <code class="notranslate">FM_*</code> variable, <code class="notranslate">FM_HOME</code> layout, configuration file name and key, skill name, and state path is unchanged.<br>
+If the repository path is ever renamed to <code class="notranslate">aman-crew</code>, both paths keep working: GitHub redirects the former path, and a <code class="notranslate">maintainer</code> scope in <code class="notranslate">config/firstmate-role</code> naming either path matches the other, so that file needs no edit (<a href="docs/configuration.md#firstmate-role-configfirstmate-role">Firstmate role</a>).</p>
+<p>Then launch one of the co-primary harnesses; AGENTS.md takes over from there:</p>
+<p><strong>Claude Code</strong></p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">claude</pre></div>

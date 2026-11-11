@@ -1,0 +1,11 @@
+# existing installation: origin points at the path it was cloned from, untouched
+$ git -C <install> remote get-url origin
+/var/folders/q4/nft8bs656qjb8k7bcjd_tt8r0000gn/T//fm-upd.Nf8grt/upstream.git
+$ bin/fm-update.sh  (run from the installed clone)
+firstmate: updated de7b739..ace62bb
+no watches registered
+reread-firstmate: no
+restart-secondmates: none
+nudge-secondmates: none
+$ git -C <install> log --oneline -1
+ace62bb v2

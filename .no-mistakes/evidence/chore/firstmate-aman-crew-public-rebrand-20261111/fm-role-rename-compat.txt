@@ -1,0 +1,32 @@
+# fm-role.sh check - repository rename compatibility (live CLI, disposable fixtures)
+
+## Compatibility: unedited config written before the rename
+$ bin/fm-role.sh check /var/folders/q4/nft8bs656qjb8k7bcjd_tt8r0000gn/T//fm-rename-lab.u9ob8x/clone-new  (home role: maintainer github.com/kunchenguid/firstmate)
+authorized: maintainer scope github.com/kunchenguid/firstmate
+rc=0
+
+## Compatibility: clone whose origin still names the former path
+$ bin/fm-role.sh check /var/folders/q4/nft8bs656qjb8k7bcjd_tt8r0000gn/T//fm-rename-lab.u9ob8x/clone-old  (home role: maintainer github.com/kunchenguid/aman-crew)
+authorized: maintainer scope github.com/kunchenguid/aman-crew
+rc=0
+
+## Compatibility: one-task --upstream-consent naming the former path
+$ bin/fm-role.sh check /var/folders/q4/nft8bs656qjb8k7bcjd_tt8r0000gn/T//fm-rename-lab.u9ob8x/clone-new upstream-consent github.com/kunchenguid/firstmate  (home role: <none, default user>)
+authorized: task consent for github.com/kunchenguid/firstmate
+rc=0
+
+## Adversarial: user home holds no authority on the renamed repo
+$ bin/fm-role.sh check /var/folders/q4/nft8bs656qjb8k7bcjd_tt8r0000gn/T//fm-rename-lab.u9ob8x/clone-new  (home role: <none, default user>)
+refused: this home runs as firstmate user/operator and holds no publication authority for github.com/kunchenguid/aman-crew
+rc=1
+
+## Adversarial: fold is per-repository, not per-owner
+$ bin/fm-role.sh check /var/folders/q4/nft8bs656qjb8k7bcjd_tt8r0000gn/T//fm-rename-lab.u9ob8x/clone-sibling  (home role: maintainer github.com/kunchenguid/firstmate)
+refused: this home runs as firstmate user/operator and holds no publication authority for github.com/kunchenguid/treehouse
+rc=1
+
+## Adversarial: consent does not leak to a sibling repo
+$ bin/fm-role.sh check /var/folders/q4/nft8bs656qjb8k7bcjd_tt8r0000gn/T//fm-rename-lab.u9ob8x/clone-sibling upstream-consent github.com/kunchenguid/firstmate  (home role: <none, default user>)
+refused: this home runs as firstmate user/operator and holds no publication authority for github.com/kunchenguid/treehouse
+rc=1
+

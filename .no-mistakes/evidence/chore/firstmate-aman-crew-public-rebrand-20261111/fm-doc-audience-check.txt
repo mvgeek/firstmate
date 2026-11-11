@@ -1,0 +1,11 @@
+# bin/fm-doc-audience-check.sh - the coverage a VISION.md/README change now selects
+
+## As shipped
+$ bin/fm-doc-audience-check.sh
+fm-doc-audience-check: ok surfaces=142 local_links=1223
+rc=0   <- README's new 'Firstmate role' link and CONTRIBUTING's new README#install-and-launch link both resolve
+
+## Adversarial: same link pointed at a nonexistent anchor
+$ bin/fm-doc-audience-check.sh
+fm-doc-audience-check: unresolved local anchor in README.md: docs/configuration.md#firstmate-role-nonexistent-anchor
+rc=1   <- fails loudly

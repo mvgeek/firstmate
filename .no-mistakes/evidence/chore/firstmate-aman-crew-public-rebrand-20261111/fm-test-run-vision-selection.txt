@@ -1,0 +1,12 @@
+# bin/fm-test-run.sh --list --changed : editing VISION.md
+
+## Before (selection surface at base commit 1d43f9cb)
+$ bin/fm-test-run.sh --list --changed --base HEAD    # VISION.md edited
+fm-test-run: no changed-test mapping for source path: VISION.md
+rc=2   <- fail-closed refusal: no mapping, so no coverage could run
+
+## After (target commit df29b5f2)
+$ bin/fm-test-run.sh --list --changed --base HEAD    # same VISION.md edit
+tests/fm-documentation-audiences.test.sh
+...  (55 scripts in the pure-contract-unit family selected)
+rc=0   <- VISION.md now selects the documentation-audience checks that validate its links and anchors

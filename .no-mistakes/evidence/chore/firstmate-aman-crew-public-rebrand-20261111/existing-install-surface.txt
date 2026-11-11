@@ -1,0 +1,5 @@
+# disposable FM_HOME, existing-install command surface
+$ bin/fm-role.sh report
+fm-role: user (default)
+$ bin/fm-role.sh report   [unedited pre-rename role file]
+fm-role: maintainer github.com/kunchenguid/firstmate (local)

@@ -1,0 +1,15 @@
+# The install path README now documents, driven as a new user would (read-only probes)
+
+$ git ls-remote --heads https://github.com/kunchenguid/aman-crew   # the README clone URL
+remote: Repository not found.
+fatal: repository 'https://github.com/kunchenguid/aman-crew/' not found
+
+$ git clone https://github.com/kunchenguid/aman-crew   # README "Install and launch"
+Cloning into 'aman-crew'...
+remote: Repository not found.
+fatal: repository 'https://github.com/kunchenguid/aman-crew/' not found
+
+$ git ls-remote --heads https://github.com/kunchenguid/firstmate   # the former path
+cf92e04a657b627aaa619503804f10f565ba7a42	refs/heads/cursor/ci-fm-ci-churn-macos-herdr-dry-e1d1
+6346895973c6f63ecfc2ebeed0234c331ee5e71e	refs/heads/devin/1790040975-secondmate-fm-root-pin
+(former path still serves; no rename redirect exists yet, so the new path is not a repository on GitHub today)

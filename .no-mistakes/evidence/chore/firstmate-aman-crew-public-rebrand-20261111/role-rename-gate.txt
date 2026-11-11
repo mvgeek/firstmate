@@ -1,0 +1,26 @@
+== project remote = renamed path (aman-crew) ==
+$ fm-role.sh check <clone>   [home: user, no role file]
+refused: this home runs as firstmate user/operator and holds no publication authority for github.com/kunchenguid/aman-crew
+  exit=1
+$ fm-role.sh check <clone>   [home: maintainer .../firstmate]
+authorized: maintainer scope github.com/kunchenguid/firstmate
+  exit=0
+$ fm-role.sh check <clone> upstream-consent github.com/kunchenguid/firstmate   [home: user]
+authorized: task consent for github.com/kunchenguid/firstmate
+  exit=0
+
+== project remote left on former path (firstmate) ==
+$ fm-role.sh check <clone>   [home: maintainer .../aman-crew]
+authorized: maintainer scope github.com/kunchenguid/aman-crew
+  exit=0
+$ fm-role.sh check <clone>   [home: user]
+refused: this home runs as firstmate user/operator and holds no publication authority for github.com/kunchenguid/firstmate
+  exit=1
+
+== adversarial: different repo, same owner ==
+$ fm-role.sh check <treehouse-clone>   [home: maintainer .../firstmate]
+refused: this home runs as firstmate user/operator and holds no publication authority for github.com/kunchenguid/treehouse
+  exit=1
+$ fm-role.sh check <treehouse-clone> upstream-consent github.com/kunchenguid/firstmate [home: user]
+refused: this home runs as firstmate user/operator and holds no publication authority for github.com/kunchenguid/treehouse
+  exit=1

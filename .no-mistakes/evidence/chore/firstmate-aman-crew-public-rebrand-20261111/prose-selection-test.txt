@@ -1,0 +1,2 @@
+$ bash tests/fm-test-run.test.sh :: test_changed_prose_selects_audience_coverage_or_nothing
+ok - changed prose selects audience coverage when mapped and nothing when deliberately unmapped

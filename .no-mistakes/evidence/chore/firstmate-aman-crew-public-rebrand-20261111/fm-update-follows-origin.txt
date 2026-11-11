@@ -1,0 +1,17 @@
+# README claim: an existing installation keeps working - /updatefirstmate follows whatever origin already points at
+# Disposable installation cloned from a throwaway local upstream; the update is driven by remote NAME, never by a hardcoded URL.
+
+$ git -C <install> remote get-url origin
+/var/folders/q4/nft8bs656qjb8k7bcjd_tt8r0000gn/T//fm-update-lab.zs19Eh/upstream.git
+$ git -C <install> rev-parse --short HEAD   # installation behind upstream
+0c98c9c
+
+$ bin/fm-update.sh
+firstmate: updated 0c98c9c..06cffda
+no watches registered
+reread-firstmate: no
+restart-secondmates: none
+nudge-secondmates: none
+
+$ git -C <install> rev-parse --short HEAD   # fast-forwarded
+06cffda
